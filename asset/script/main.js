@@ -44,6 +44,11 @@ onSuccess: function(event, fields)
 function isOfficial(form)
 {
     var address = new URL(form)
+    var hostspl = address.hostname.split('.');
+    var hostlst = hostspl.slice(Math.max(hostspl.length - 2, 0));
+    var hostnam = hostlst.join('.');
+
+    console.log(hostnam)
 
     var web3     = new Web3(new Web3.providers.HttpProvider(data.node));
     var contract = web3.eth.contract(data.contract.abicode).at(data.contract.address);
@@ -55,7 +60,7 @@ function isOfficial(form)
 
     eacher.forEach(function(item)
     {
-        var path = address.hostname + pather.join('/');
+        var path = hostnam + pather.join('/');
 
         console.log(path)
 
